@@ -2,10 +2,9 @@ import React from "react";
 
 import ReactDOM from 'react-dom'
 
-import Hello from "./component/demo/Hello";
-
+import App from './component/App'
 
 ReactDOM.render(
-  <Hello name="CHW" />,
+  <App />,
   document.querySelectorAll('#app')[0]
 )
