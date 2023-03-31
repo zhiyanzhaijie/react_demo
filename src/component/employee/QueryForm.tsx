@@ -2,6 +2,8 @@ import React from 'react'
 import {Form, Input, Button, Select} from 'antd'
 import { EmployeeRequest } from '../../interface/employee'
 
+import { get } from '../utils/request'
+import { GET_EMPLOYEE_URL } from '../../constants/urls'
 const { Option } = Select
 
 class QueryForm extends React.Component<{}, EmployeeRequest> {
@@ -9,6 +11,21 @@ class QueryForm extends React.Component<{}, EmployeeRequest> {
     name: '',
     departmentId: undefined
   }
+    
+  handleSubmit() {
+    this.queryEmployee(this.state)
+  }
+
+  componentDidMount(): void {
+    this.queryEmployee(this.state)
+  }
+
+  queryEmployee(param: EmployeeRequest) {
+    get(GET_EMPLOYEE_URL, param).then(res => {
+      console.log(res)
+    })
+  }
+
   handleChange(e:React.FormEvent<HTMLInputElement>) {
     this.setState({
       name: e.currentTarget.value
@@ -46,7 +63,7 @@ class QueryForm extends React.Component<{}, EmployeeRequest> {
             </Select>
           </Form.Item>
           <Form.Item>
-            <Button type='primary'>查询</Button>
+            <Button type='primary' onClick={this.handleSubmit} >查询</Button>
           </Form.Item>
         </Form>
       </>
